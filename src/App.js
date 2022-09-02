@@ -1,11 +1,11 @@
 import "./App.css";
-import Verify from "./component/Verify";
+import GiftRedeem from "./component/GiftRedeem";
 import data from "./data";
 
 function App() {
   return (
     <div className="App">
-      <Verify data={data} />
+      <GiftRedeem data={data} />
     </div>
   );
 }
