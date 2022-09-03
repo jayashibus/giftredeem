@@ -20,7 +20,9 @@ https://github.com/jayashibus/giftredeem
 
 ### Step 2
 
-### `npm install`
+```sh
+npm install
+```
 
 ### Step 3
 
