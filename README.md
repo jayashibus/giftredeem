@@ -75,9 +75,9 @@ CREATE TABLE `redemption` (
 ```
 
 Step 6
+Update DB details in server/router/index.js Line 5
 
 ```sh
-Update DB details in server/router/index.js Line 5
 const db = mysql.createConnection({
 host: "localhost",
 user: "root",
