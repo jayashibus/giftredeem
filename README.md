@@ -15,8 +15,10 @@ nodemon
 
 From the command line, clone the repository:
 
+```sh
 $ git clone https://github.com/jayashibus/giftredeem.git
-https://github.com/jayashibus/giftredeem
+```
+
 
 ### Step 2
 
