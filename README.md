@@ -2,14 +2,14 @@
 
 You will need:
 
-node
-axios
-mysql
+* node
+* axios
+* mysql
 
 Dev Dependencies
-express
-http-proxy-middleware
-nodemon
+* express
+* http-proxy-middleware
+* nodemon
 
 ### Step 1 - Clone the repository:
 
