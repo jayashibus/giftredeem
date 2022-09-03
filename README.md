@@ -70,7 +70,6 @@ CREATE TABLE `redemption` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
 
-
 Step 6
 
 ```sh
