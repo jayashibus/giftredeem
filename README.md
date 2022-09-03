@@ -35,6 +35,8 @@ npm start
 The Application Runs on localhost:3000
 ![Screenshot](HomePage.png)
 
+![Screenshot](RedeemPage.png)
+
 
 ### step 4
 
