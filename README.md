@@ -1,16 +1,3 @@
-### Dependencies
-
-You will need:
-
-* node
-* axios
-* mysql
-
-Dev Dependencies
-* express
-* http-proxy-middleware
-* nodemon
-
 ### Step 1 - Clone the repository:
 
 From the command line, clone the repository:
@@ -86,3 +73,16 @@ password: "",
 database: "giftredeem",
 });
 ```
+
+### Dependencies
+
+You will need:
+
+* node
+* axios
+* mysql
+
+Dev Dependencies
+* express
+* http-proxy-middleware
+* nodemon
