@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+### Dependencies
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+You will need:
 
-## Available Scripts
+node
+axios
+mysql
 
-In the project directory, you can run:
+Dev Dependencies
+express
+http-proxy-middleware
+nodemon
+
+### Step 1 - Clone the repository:
+
+From the command line, clone the repository:
+
+$ git clone https://github.com/jayashibus/giftredeem.git
+https://github.com/jayashibus/giftredeem
+
+### Step 2
+
+### `npm install`
+
+### Step 3
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The Application Runs on localhost:3000
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### step 4
 
-### `npm test`
+### `npm run server`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Step 5
 
-### `npm run build`
+CREATE DATABASE giftredeem;
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+CREATE TABLE `staff_details` (
+`staff_pass_id` varchar(255) NOT NULL,
+`team_name` varchar(255) NOT NULL,
+`created_at` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+INSERT INTO `staff_details` (`staff_pass_id`, `team_name`, `created_at`) VALUES
+('STAFF_H123804820G', 'BASS', '1623772799000'),
+('MANAGER_T999888420B', 'RUST', '1623772799000'),
+('BOSS_T000000001P', 'RUST', '1623872111000');
+COMMIT;
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+CREATE TABLE `redemption` (
+`staff_pass_id` varchar(255) NOT NULL,
+`team_name` varchar(255) DEFAULT NULL,
+`redeemed_at` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-### `npm run eject`
+Step 6
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Update DB details in server/router/index.js Line 5
+const db = mysql.createConnection({
+host: "localhost",
+user: "root",
+password: "",
+database: "giftredeem",
+});
