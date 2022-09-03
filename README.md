@@ -26,13 +26,17 @@ npm install
 
 ### Step 3
 
-### `npm start`
+```sh
+npm start
+```
 
 The Application Runs on localhost:3000
 
 ### step 4
 
-### `npm run server`
+```sh
+npm run server
+```
 
 Step 5
 
