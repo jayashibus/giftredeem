@@ -44,7 +44,7 @@ The Application Runs on localhost:3000
 npm run server
 ```
 
-Step 5
+### Step 5
 
 ```sh
 CREATE DATABASE giftredeem;
@@ -74,7 +74,8 @@ CREATE TABLE `redemption` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
 
-Step 6
+### Step 6
+
 Update DB details in server/router/index.js Line 5
 
 ```sh
