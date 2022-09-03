@@ -1,35 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { addRedemption, getRedemption } from "./../http/HttpService";
 
-const GiftRedeem = (props) => {
-  const [staffid, setStaffid] = useState("");
-  const [teamName, setTeamName] = useState("");
+const GiftRedeem = ({ data }) => {
+  const [staffId, setStaffId] = useState("");
   const [error, setError] = useState("");
   const [validStaff, setValidStaff] = useState(false);
-  const [staffdetails, setStaffdetails] = useState([]);
-  const [redemption, setRedemption] = useState([]);
-  const [redemptionSuccess, setRedemptionSucess] = useState(false);
-  const [validRedemtion, setValidRedemtion] = useState(true);
+  const [staffDetails, setStaffDetails] = useState([]);
+  const [redemptionSuccess, setRedemptionSuccess] = useState(false);
+  const [validRedemption, setValidRedemption] = useState(true);
+  const [redemptionData, setRedemptionData] = useState([]);
 
-  const onClickHandler = (e) => {
+  const message = {
+    success:
+      "You are Successfully redeem your team Gift. Thank you. Happy Christmas..!",
+    available:
+      "Christmas Gifts are available for your Team. Kindly show your staff id and collect your team gifts.",
+    already:
+      "Already one of your team representative collected your Team gifts. Thank you. Happy Christmas.!",
+    season:
+      "Christmas season begins. Connected with us and send your representative to redeem your Team gift's. Thanks you.",
+  };
+
+  useEffect(() => {
+    setRedemptionData([...redemptionData, ...data.redemptionData]);
+  }, [data]);
+
+  const onClickVerifyHandler = (e) => {
     e.preventDefault();
-    console.log(staffid);
-    if (!staffid) {
+    if (!staffId) {
       setError("Staff field empty. Enter valid staff ID");
     } else {
-      console.log(props.data);
-      const valid = props.data.find((item) => item.staff_pass_id === staffid);
+      const valid = data.staffData.find(
+        (item) => item.staff_pass_id === staffId
+      );
+
       if (valid) {
-        setStaffdetails(valid);
+        setStaffDetails(valid);
         setValidStaff(true);
         setError("");
-        const alreadyRedeemed = redemption.find(
+        const alreadyRedeemed = redemptionData.find(
           (team) => team.team_name === valid.team_name
         );
-        if (alreadyRedeemed) {
-          setValidRedemtion(false);
-        }
 
-        console.log("Valid Redemption : ", alreadyRedeemed);
+        if (alreadyRedeemed) {
+          setValidRedemption(false);
+        }
       } else {
         setError("Invalid Staff ID");
       }
@@ -37,109 +52,97 @@ const GiftRedeem = (props) => {
   };
 
   const onClickRedeemHandler = (teamName, staffPassId) => {
-    console.log(teamName);
-    console.log(staffPassId);
-    const currentDateTime = new Date().toLocaleString();
-
-    const newredemtion = {
-      staff_pass_id: staffPassId,
+    const currentDateTime = Date.parse(Date());
+    addRedemption({
       team_name: teamName,
-      created_at: currentDateTime,
-    };
-    setRedemption([...redemption, newredemtion]);
-    setRedemptionSucess(true);
+      staff_pass_id: staffPassId,
+      redeemed_at: currentDateTime,
+    });
+
+    getRedemption().then((redemptionData) => {
+      console.log(data);
+      setRedemptionData(redemptionData);
+    });
+
+    setRedemptionSuccess(true);
   };
 
   const onClickHomeHandler = () => {
     setValidStaff(false);
-    setRedemptionSucess(false);
-    setValidRedemtion(true);
-    setStaffid("");
+    setRedemptionSuccess(false);
+    setValidRedemption(true);
+    setStaffId("");
   };
 
-  console.log(redemption);
+  const messageBox = (title, message) => {
+    return (
+      <>
+        <h1>Welcome, {title} </h1>
+        <p>{message}</p>
+      </>
+    );
+  };
+
+  const form = () => {
+    return (
+      <form onSubmit={onClickVerifyHandler}>
+        {validStaff ? (
+          <>
+            <input type="text" value={`ID : ${staffId}`} disabled />
+            <input
+              type="text"
+              value={`Team : ${staffDetails.team_name}`}
+              disabled
+            />
+
+            <span className="primary_color">
+              {"Account Verified Successfully"}
+            </span>
+          </>
+        ) : (
+          <>
+            <input
+              type="text"
+              value={staffId}
+              placeholder="Enter Staff ID"
+              onChange={(e) => setStaffId(e.target.value)}
+            />
+            {error ? <span className="error_message">{error}</span> : ""}
+            <button>Verify</button>
+          </>
+        )}
+      </form>
+    );
+  };
+
   return (
     <div className="login-page">
       <h2>Welcome to our gift's redemption counter</h2>
       <div className="container" id="container">
-        <div className="form-container sign-in-container">
-          <form onSubmit={onClickHandler}>
-            <h1>Staff Details</h1>
-            <span>Required to redeem Gift</span>
-
-            {validStaff ? (
-              <>
-                <input type="text" value={`ID : ${staffid}`} disabled />
-                <input
-                  type="text"
-                  value={`Team : ${staffdetails.team_name}`}
-                  disabled
-                />
-
-                <button className="green" disabled>
-                  Account Verified
-                </button>
-              </>
-            ) : (
-              <>
-                <input
-                  type="text"
-                  value={staffid}
-                  placeholder="Enter Staff ID"
-                  onChange={(e) => setStaffid(e.target.value)}
-                />
-                {error ? <span className="error_message">{error}</span> : ""}
-                <button>Verify</button>
-              </>
-            )}
-          </form>
-        </div>
+        <div className="form-container sign-in-container">{form()}</div>
         <div className="overlay-container">
           <div
-            className={`overlay${validStaff && validRedemtion ? "_green" : ""}`}
+            className={`overlay${
+              validStaff && validRedemption ? "_green" : ""
+            }`}
           >
             <div className="overlay-panel overlay-right">
-              {validStaff && validRedemtion ? (
-                <>
-                  <h1>Welcome, {staffdetails.team_name} </h1>
-                  {redemptionSuccess ? (
-                    <p>
-                      You are Successfully redeem your team Gift. Thank you.{" "}
-                      Happy Christmas..!
-                    </p>
-                  ) : (
-                    <p>
-                      Christmas Gifts are avaible for your Team. Please come and
-                      collect.
-                    </p>
-                  )}
-                </>
-              ) : validStaff && !validRedemtion ? (
-                <>
-                  <h1>Welcome, {staffdetails.team_name} </h1>
-                  <p>
-                    Already one of your team representative collected your Team
-                    gifts. Thank you. Happy Christmas.!
-                  </p>
-                </>
-              ) : (
-                <>
-                  <h1>Hello, Teams! </h1>
-                  <p>
-                    Christmas season begins. Connected with us and send your
-                    representative to redeem your Team gift's. Thanks you.
-                  </p>
-                </>
-              )}
+              {validStaff && validRedemption
+                ? redemptionSuccess
+                  ? messageBox(staffDetails.team_name, message.success)
+                  : messageBox(staffDetails.team_name, message.available)
+                : validStaff && !validRedemption
+                ? messageBox(staffDetails.team_name, message.already)
+                : messageBox("Teams!", message.season)}
 
-              {validStaff && !redemptionSuccess && validRedemtion && (
+              {validStaff && !redemptionSuccess && validRedemption && (
                 <button
-                  className="ghost"
+                  className="success"
                   id="signUp"
                   onClick={() =>
                     onClickRedeemHandler(
-                      staffdetails.team_name,
-                      staffdetails.staff_pass_id
+                      staffDetails.team_name,
+                      staffDetails.staff_pass_id
                     )
                   }
                 >
@@ -149,17 +152,17 @@ const GiftRedeem = (props) => {
 
               {validStaff && redemptionSuccess && (
                 <button
-                  className="ghost"
+                  className="success"
                   id="signUp"
                   onClick={onClickHomeHandler}
                 >
-                  Serve Another Team
+                  Serve New Team
                 </button>
               )}
 
-              {!validRedemtion && (
+              {!validRedemption && (
                 <button
-                  className="ghost"
+                  className="success"
                   id="signUp"
                   onClick={onClickHomeHandler}
                 >

@@ -44,25 +44,13 @@ a {
 }
 
 button {
-  border-radius: 20px;
+  /* border-radius: 20px; */
   border: 1px solid #ff4b2b;
   background-color: #ff4b2b;
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;
-  padding: 12px 45px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  transition: transform 80ms ease-in;
-}
-button.green {
-  border-radius: 20px;
-  border: 1px solid #2c920d;
-  background-color: #2c920d;
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 12px 45px;
+  padding: 10px;
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: transform 80ms ease-in;
@@ -76,7 +64,7 @@ button:focus {
   outline: none;
 }
 
-button.ghost {
+button.success {
   background-color: transparent;
   border-color: #ffffff;
 }
@@ -84,7 +72,7 @@ button.ghost {
 form {
   background-color: #ffffff;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   flex-direction: column;
   padding: 0 50px;
@@ -102,7 +90,7 @@ input {
 
 .container {
   background-color: #fff;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
   overflow: hidden;
@@ -229,4 +217,8 @@ input {
 .error_message {
   color: #ff4b2b;
   height: 22px;
+}
+
+.primary_color {
+  color: #2c920d;
 }
