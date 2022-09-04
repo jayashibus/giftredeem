@@ -26,7 +26,7 @@ Home page there have a input field to key in Staff ID
 
 ![Screenshot](HomePage.png)
 
-Entered staff id will be validated in the backend. If the team haven't collected the gift yet then Gift redeem page will show with Redeem Gift button.
+Entered staff id will be validated in the backend. If the team haven't collected the gift yet then Gift redeem page will show witnph Redeem Gift button.
 
 ![Screenshot](RedeemPage.png)
 

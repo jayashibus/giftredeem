@@ -11,7 +11,6 @@ function App() {
 
   useEffect(() => {
     Promise.all([getStaffDetails(), getRedemption()]).then((values) => {
-      // console.log(values);
       setData({
         ...data,
         staffData: values[0],

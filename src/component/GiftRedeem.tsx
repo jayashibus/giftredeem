@@ -21,14 +21,12 @@ const GiftRedeem = ({ data }: any) => {
   const [validRedemption, setValidRedemption] = useState<boolean>(true);
   const [redemptionData, setRedemptionData] = useState<Array<any>>([]);
 
-  // useEffect(() => {
-  //   setRedemptionData([...redemptionData, ...data.redemptionData]);
-  // }, [data]);
+  useEffect(() => {
+    setRedemptionData([...redemptionData, ...data.redemptionData]);
+  }, [data]);
 
   const onClickVerifyHandler = (e: any) => {
     e.preventDefault();
-
-    console.log("Onclick Satffid ", staffId);
 
     if (!staffId) {
       setError(CONSTANTS.giftRedeemScreen.validationMsg.emptyFied);
@@ -61,7 +59,6 @@ const GiftRedeem = ({ data }: any) => {
     });
 
     getRedemption().then((redemptionData: any) => {
-      console.log(data);
       setRedemptionData(redemptionData);
     });
 
