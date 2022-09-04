@@ -6,7 +6,6 @@ From the command line, clone the repository:
 $ git clone https://github.com/jayashibus/giftredeem.git
 ```
 
-
 ### Step 2
 
 ```sh
@@ -20,10 +19,20 @@ npm start
 ```
 
 The Application Runs on localhost:3000
+
+### Frontend Flow
+
+Home page there have a input field to key in Staff ID
 ![Screenshot](HomePage.png)
 
+Entered staff id will be validated in the backend. If the team haven't collected the gift yet then Gift redeem page will show. Here have a Redeem button and redeem the Team gift.
 ![Screenshot](RedeemPage.png)
 
+Click the redeem button and collect the Chrismas gift.
+![Screenshot](succesRedeem.png)
+
+If the team already collected the gift then will shows this page.
+![Screenshot](AlreadyRedeemed.png)
 
 ### step 4
 
@@ -74,15 +83,22 @@ database: "giftredeem",
 });
 ```
 
+### Unit Testing
+
+```sh
+npm run test
+```
+
 ### Dependencies
 
 You will need:
 
-* node
-* axios
-* mysql
+- node
+- axios
+- mysql
 
 Dev Dependencies
-* express
-* http-proxy-middleware
-* nodemon
+
+- express
+- http-proxy-middleware
+- nodemon

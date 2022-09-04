@@ -20,6 +20,7 @@ const data = [
     created_at: "1623772799000",
   },
 ];
+
 describe("<GiftRedeem />", () => {
   test("renders component", () => {
     const { container } = render(<GiftRedeem data={data} />);
@@ -48,6 +49,6 @@ describe("<GiftRedeem />", () => {
 
 describe("Find the Staff Account", () => {
   test("Find staff details", () => {
-    expect(findStaffRecord(data, "STAFF_H123804820GSS")).toBeTruthy();
+    expect(findStaffRecord(data, "STAFF_H123804820G")).toBeTruthy();
   });
 });
