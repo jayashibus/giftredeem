@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Form /> renders component 1`] = `
+<div>
+  <form>
+    <input
+      disabled=""
+      type="text"
+      value="ID : STAFF_H123804820G"
+    />
+    <input
+      disabled=""
+      type="text"
+      value="Team : RUST"
+    />
+    <span
+      class="primary-color"
+    >
+      Account Verified Successfully
+    </span>
+  </form>
+</div>
+`;

@@ -3,21 +3,21 @@ import { http } from "./interceptors";
 export const getStaffDetails = () => {
   return http
     .get("/api/getStaffDetails")
-    .then((result) => {
+    .then((result: any) => {
       return result.data;
     })
-    .catch((error) => {
+    .catch((error: any) => {
       return Promise.reject(error);
     });
 };
 
-export const addRedemption = (payload) => {
+export const addRedemption = (payload: any) => {
   return http
     .post("/api/addRedemption", payload)
-    .then((result) => {
+    .then((result: any) => {
       return result.data;
     })
-    .catch((error) => {
+    .catch((error: any) => {
       return Promise.reject(error);
     });
 };
@@ -25,10 +25,10 @@ export const addRedemption = (payload) => {
 export const getRedemption = () => {
   return http
     .get("/api/getRedemption")
-    .then((result) => {
+    .then((result: any) => {
       return result.data;
     })
-    .catch((error) => {
+    .catch((error: any) => {
       return Promise.reject(error);
     });
 };

@@ -1,37 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { addRedemption, getRedemption } from "./../http/HttpService";
+import { addRedemption, getRedemption } from "../http/HttpService";
+import { CONSTANTS } from '../constants'
 
-const GiftRedeem = ({ data }) => {
-  const [staffId, setStaffId] = useState("");
-  const [error, setError] = useState("");
-  const [validStaff, setValidStaff] = useState(false);
-  const [staffDetails, setStaffDetails] = useState([]);
-  const [redemptionSuccess, setRedemptionSuccess] = useState(false);
-  const [validRedemption, setValidRedemption] = useState(true);
-  const [redemptionData, setRedemptionData] = useState([]);
+type IStaffDetails = {
+  team_name: string;
+  staff_pass_id: string;
+  redeemed_at: string;
+}
 
-  const message = {
-    success:
-      "You are Successfully redeem your team Gift. Thank you. Happy Christmas..!",
-    available:
-      "Christmas Gifts are available for your Team. Kindly show your staff id and collect your team gifts.",
-    already:
-      "Already one of your team representative collected your Team gifts. Thank you. Happy Christmas.!",
-    season:
-      "Christmas season begins. Connected with us and send your representative to redeem your Team gift's. Thanks you.",
-  };
+
+const GiftRedeem = ({ data }: any) => {
+  const [staffId, setStaffId] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [validStaff, setValidStaff] = useState<boolean>(false);
+  const [staffDetails, setStaffDetails] = useState<IStaffDetails>({} as any);
+  const [redemptionSuccess, setRedemptionSuccess] = useState<boolean>(false);
+  const [validRedemption, setValidRedemption] = useState<boolean>(true);
+  const [redemptionData, setRedemptionData] = useState<Array<any>>([]);
 
   useEffect(() => {
     setRedemptionData([...redemptionData, ...data.redemptionData]);
   }, [data]);
 
-  const onClickVerifyHandler = (e) => {
+  const onClickVerifyHandler = (e: any) => {
     e.preventDefault();
     if (!staffId) {
-      setError("Staff field empty. Enter valid staff ID");
+      setError(CONSTANTS.giftRedeemScreen.validationMsg.emptyFied);
     } else {
-      const valid = data.staffData.find(
-        (item) => item.staff_pass_id === staffId
+      const valid = data?.staffData.find(
+        (item: any) => item.staff_pass_id === staffId
       );
 
       if (valid) {
@@ -39,19 +36,19 @@ const GiftRedeem = ({ data }) => {
         setValidStaff(true);
         setError("");
         const alreadyRedeemed = redemptionData.find(
-          (team) => team.team_name === valid.team_name
+          (team: any) => team.team_name === valid.team_name
         );
 
         if (alreadyRedeemed) {
           setValidRedemption(false);
         }
       } else {
-        setError("Invalid Staff ID");
+        setError(CONSTANTS.giftRedeemScreen.validationMsg.invalidStaffId);
       }
     }
   };
 
-  const onClickRedeemHandler = (teamName, staffPassId) => {
+  const onClickRedeemHandler = (teamName: string, staffPassId: string) => {
     const currentDateTime = Date.parse(Date());
     addRedemption({
       team_name: teamName,
@@ -59,7 +56,7 @@ const GiftRedeem = ({ data }) => {
       redeemed_at: currentDateTime,
     });
 
-    getRedemption().then((redemptionData) => {
+    getRedemption().then((redemptionData: any) => {
       console.log(data);
       setRedemptionData(redemptionData);
     });
@@ -74,7 +71,12 @@ const GiftRedeem = ({ data }) => {
     setStaffId("");
   };
 
-  const messageBox = (title, message) => {
+  type IMessageBox = {
+    title: string;
+    message: string;
+  }
+
+  const MessageBox = ({ title, message }: IMessageBox) => {
     return (
       <>
         <h1>Welcome, {title} </h1>
@@ -117,23 +119,24 @@ const GiftRedeem = ({ data }) => {
 
   return (
     <div className="login-page">
-      <h2>Welcome to our gift's redemption counter</h2>
+      <h2>{CONSTANTS.giftRedeemScreen.title}</h2>
       <div className="container" id="container">
         <div className="form-container sign-in-container">{form()}</div>
         <div className="overlay-container">
           <div
-            className={`overlay${
-              validStaff && validRedemption ? "_green" : ""
-            }`}
+            className={`overlay${validStaff && validRedemption ? "_green" : ""
+              }`}
           >
             <div className="overlay-panel overlay-right">
               {validStaff && validRedemption
                 ? redemptionSuccess
-                  ? messageBox(staffDetails.team_name, message.success)
-                  : messageBox(staffDetails.team_name, message.available)
+                  ? (
+                    <MessageBox title={staffDetails.team_name} message={CONSTANTS.giftRedeemScreen.message.success} />
+                  )
+                  : <MessageBox title={staffDetails.team_name} message={CONSTANTS.giftRedeemScreen.message.available} />
                 : validStaff && !validRedemption
-                ? messageBox(staffDetails.team_name, message.already)
-                : messageBox("Teams!", message.season)}
+                  ? <MessageBox title={staffDetails.team_name} message={CONSTANTS.giftRedeemScreen.message.already} />
+                  : <MessageBox title={CONSTANTS.giftRedeemScreen.messageTitle} message={CONSTANTS.giftRedeemScreen.message.season} />}
 
               {validStaff && !redemptionSuccess && validRedemption && (
                 <button
@@ -146,7 +149,7 @@ const GiftRedeem = ({ data }) => {
                     )
                   }
                 >
-                  Redeem Gift
+                  {CONSTANTS.giftRedeemScreen.button.redeemGift}
                 </button>
               )}
 
@@ -156,7 +159,7 @@ const GiftRedeem = ({ data }) => {
                   id="signUp"
                   onClick={onClickHomeHandler}
                 >
-                  Serve New Team
+                  {CONSTANTS.giftRedeemScreen.button.serveNewteam}
                 </button>
               )}
 
@@ -166,7 +169,7 @@ const GiftRedeem = ({ data }) => {
                   id="signUp"
                   onClick={onClickHomeHandler}
                 >
-                  Serve New Team
+                 {CONSTANTS.giftRedeemScreen.button.serveNewteam}
                 </button>
               )}
             </div>
