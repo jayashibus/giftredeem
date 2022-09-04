@@ -23,15 +23,19 @@ The Application Runs on localhost:3000
 ### Frontend Flow
 
 Home page there have a input field to key in Staff ID
+
 ![Screenshot](HomePage.png)
 
 Entered staff id will be validated in the backend. If the team haven't collected the gift yet then Gift redeem page will show with Redeem Gift button.
+
 ![Screenshot](RedeemPage.png)
 
 After successfull redeemption will get successfull message and will get new button "Serve New Team" to navigate home page.
+
 ![Screenshot](succesRedeem.png)
 
 If the team already collected the gift then will apear this page with message.
+
 ![Screenshot](AlreadyRedeemed.png)
 
 ### step 4
